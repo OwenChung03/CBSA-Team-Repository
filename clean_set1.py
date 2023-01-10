@@ -1,9 +1,11 @@
 """This file contains functions to cleanse the dataset"""
 
+
 # Import libraries
 import pandas as pd
 
 
+# Define functions
 def load_dataset(filename):
     """Loads the dataset
 
