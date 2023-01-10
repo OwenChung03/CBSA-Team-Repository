@@ -11,14 +11,15 @@ We use AC2022_set1.xlsx.
 We remove rows with NaN element in either their content column or headline column as they are not useful for us to analyze texts. We also remove duplicated headlines to avoid weighted results. You may review clean_set1.ipynb for detailed code
 https://colab.research.google.com/drive/1WU9oGpxcGqJWikGTn9OJ3OGTL1CRp4_A
 A cleansed version of AC2022_set1.xlsx is exported with the filename set1(cleansed).csv. Download or review here.
-Data Structuring
+### 2. Data Structuring
 Later we will fit texts to FinBERT, a financial domain-specific pre-trained language model. The model used training samples of short sentences in english 1. Most headlines in set1(cleansed).csv are in chinese. We translate all the headlines in set1(cleansed).csv to english and remove headlines longer than 400 characters. headline_en.xlsx stored all the translation results. You may review combine.ipynb for detailed code on concating headline_en col and removing headlines longer than 400 characters https://colab.research.google.com/drive/1dCumBWWNbojw2iKFdfWQO8YNw-y5ZS7u 
 A translated version of set1(cleansed).csv is exported with the filename set1(cleansed+translated).csv. Download or review here.
-Data Modeling
+### 3. Data Modeling
 By far, we transformed AC2022_set1.xlsx to set1(cleansed+translated).csv which can be understanded as the cleansed and structured version of AC2022_set1.xlsx. In the process, we also removed columns that we certainly will not use in this model (i.e. engagements, non_view_engagements, author_name, pub_name, pub_code, region, url, fans_count) bringing size of the table from 351442 rows × 24 columns down to 195435 rows × 17 columns. Now, we fit all 195435 english headlines in the headline_en column to finbert-esg-9-categories and finbert-tone. For finbert-esg-9-categories, each headline is classified as one of the 9 categories (i.e. Climate Change, Natural Capital, Pollution and Waste, Human Capital, Product Liability, Community Relations, Corporate Governance,  Business Ethics & Values and Non-ESG) along with a score. As for finbert-tone, each headline is classified as one of the 3 categories (i.e. Positive, Negative and Neutral) along with a score. You may review finbert9_update.ipynb for detailed code on running the models
 https://colab.research.google.com/drive/14QKInQNNcSeAYhxeYlZ7LhY08ZKawt43#scrollTo=bh7rVQ5ssK6s
 The result is exported to cat9.xlsx.
 A concatenated version of set1(cleansed+translated).csv and cat9.xlsx is exported with the filename set1(cleansed+translated+labeled).csv. Download or review here. The size of the table is 195435 rows × 23 columns.
+### 4. 
 Data Grouping
 We are based on the Hang Seng Industry Classification System 2 to define 12 groups (or call it sectors/industries). They are Energy🔋, Materials💎, Industrials🏭, Consumer Discretionary🎮, Consumer Staples🌽, Healthcare🩺, Telecommunications☎️, Utilities⛴, Financials💰, Properties & Construction🏗, Information Technology📲 and Conglomerates🏢. We then filter relevant content to the group based on the occurrence of certain keywords in the headline. The keywords are stored in the 6th sheet of HSIClass.xlsx (‘concat_list’). In each column, we stored the keywords used to identify the corresponding industry of the column heading. 
 The column headings as you may notice are the 12 industries we just mentioned with some slight changes. Notice they have no space, no '_', no capital letters and they end with 's'.
