@@ -19,8 +19,7 @@ By far, we transformed AC2022_set1.xlsx to set1(cleansed+translated).csv which c
 https://colab.research.google.com/drive/14QKInQNNcSeAYhxeYlZ7LhY08ZKawt43#scrollTo=bh7rVQ5ssK6s
 The result is exported to cat9.xlsx.
 A concatenated version of set1(cleansed+translated).csv and cat9.xlsx is exported with the filename set1(cleansed+translated+labeled).csv. Download or review here. The size of the table is 195435 rows × 23 columns.
-### 4. 
-Data Grouping
+### 4. Data Grouping
 We are based on the Hang Seng Industry Classification System 2 to define 12 groups (or call it sectors/industries). They are Energy🔋, Materials💎, Industrials🏭, Consumer Discretionary🎮, Consumer Staples🌽, Healthcare🩺, Telecommunications☎️, Utilities⛴, Financials💰, Properties & Construction🏗, Information Technology📲 and Conglomerates🏢. We then filter relevant content to the group based on the occurrence of certain keywords in the headline. The keywords are stored in the 6th sheet of HSIClass.xlsx (‘concat_list’). In each column, we stored the keywords used to identify the corresponding industry of the column heading. 
 The column headings as you may notice are the 12 industries we just mentioned with some slight changes. Notice they have no space, no '_', no capital letters and they end with 's'.
 Energy🔋 - energies
@@ -48,9 +47,10 @@ Neutral words
 Representativeness (One way to test this is to actually google it to see if relevant news pop up)
 Overlapping (For example: 「電」 always occurs in the content of the industry of utilities (「發電站」,「電力」,「供電」). We can simply use 「電」 to search all those words in the parentheses. However, we know that other words like: 「電話」,「電池」,「電視」,「電單車」 will also be searched out but not related to the target industry. We avoid this kind of overlapping.)
 
-Remarks: We assume a headline consists of any word in the column, then the content is relevant to that industry. But it may not be the case. For example: a sentence 「零售人力資源出現需求」 consists of the word 「資源」 in energies column, then this sentence is regarded as Energy related even for us it is more about the Consumer Discretionary or Consumer Staples. Note that this sentence also consists of the word 「零售」in nonconsumers column. In such a case, this sentence is regarded as both Energy and Consumer Discretionary, form the overlapping situation I mentioned above.
+### Remarks: 
+We assume a headline consists of any word in the column, then the content is relevant to that industry. But it may not be the case. For example: a sentence 「零售人力資源出現需求」 consists of the word 「資源」 in energies column, then this sentence is regarded as Energy related even for us it is more about the Consumer Discretionary or Consumer Staples. Note that this sentence also consists of the word 「零售」in nonconsumers column. In such a case, this sentence is regarded as both Energy and Consumer Discretionary, form the overlapping situation I mentioned above.
 Not all headlines are used. Headlines that are not grouped to any industry simply because they don’t consist of any word in the concat_list.
-Data Analysis
+### Data Analysis
 Encode ‘Positive’, ‘Negative’ and ‘Neutral’ as 1,-1 and 0 respectively. Create a new column sentimen_code to store the results. 
 Define esg related as a boolean representing TRUE(1) or FALSE(0) of the condition: esg_9_categories is not ‘Non-ESG’ and esg_9_categories_score  c, where c[0,1]
 Define confirmation as a boolean representing TRUE(1) or FALSE(0) of the condition: sentiment_score  d, where d[0,1]
