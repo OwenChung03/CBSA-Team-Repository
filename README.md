@@ -50,7 +50,7 @@ Overlapping (For example: 「電」 always occurs in the content of the industry
 ### Remarks: 
 We assume a headline consists of any word in the column, then the content is relevant to that industry. But it may not be the case. For example: a sentence 「零售人力資源出現需求」 consists of the word 「資源」 in energies column, then this sentence is regarded as Energy related even for us it is more about the Consumer Discretionary or Consumer Staples. Note that this sentence also consists of the word 「零售」in nonconsumers column. In such a case, this sentence is regarded as both Energy and Consumer Discretionary, form the overlapping situation I mentioned above.
 Not all headlines are used. Headlines that are not grouped to any industry simply because they don’t consist of any word in the concat_list.
-### Data Analysis
+### 5. Data Analysis
 Encode ‘Positive’, ‘Negative’ and ‘Neutral’ as 1,-1 and 0 respectively. Create a new column sentimen_code to store the results. 
 Define esg related as a boolean representing TRUE(1) or FALSE(0) of the condition: esg_9_categories is not ‘Non-ESG’ and esg_9_categories_score  c, where c[0,1]
 Define confirmation as a boolean representing TRUE(1) or FALSE(0) of the condition: sentiment_score  d, where d[0,1]
@@ -91,5 +91,13 @@ ESG hotness = i=0mesg relatedii=0mnon esgi, where m is the max row index
 Set e=0
 ESG hotness=(0+0+1+1)/(1+0+0+0)=2
 ESG hotness is scale from 0 to +. The larger the number, the more dominant is ESG conversation compared to Non-ESG conversation.
-Data Visualization
-Set c=d=0.85
+### 6. Data Visualization
+#### Example
+Set c=d=0.85, we have: 
+
+| i | esg_9_categories | esg_9_categories_score | sentiment_code | sentiment_score |
+| ------------- |:-------------:| -----:| -----:| -----:|
+| 0 | Non-ESG | 0.3 | 1 | 0.92 |
+| 1 | Climate Change | 0.83 | -1 | 0.89 |
+| 2 | Climate Change | 0.87 | -1 | 0.99 |
+| 3 | Product Liability | 1 | 0 | 0.85
